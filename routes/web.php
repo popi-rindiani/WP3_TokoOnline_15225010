@@ -67,3 +67,11 @@ Route::post('/logout', [CustomerController::class, 'logout'])->name('logout');
 
 // Route untuk Customer
 Route::resource('backend/customer', CustomerController::class, ['as' => 'backend'])->middleware('auth');
+
+// Group route untuk customer
+Route::middleware('is.customer')->group(function () {
+    // Route untuk menampilkan halaman akun customer
+Route::get('/customer/akun/{id}', [CustomerController::class, 'akun']) ->name('customer.akun');
+    // Route untuk mengupdate data akun customer
+Route::put('/customer/updateakun/{id}', [CustomerController::class, 'updateAkun']) ->name('customer.updateakun');
+});
